@@ -400,57 +400,6 @@ h6 {
 }
 
 /* ============================================================
-   HERO AVATAR
-   Minimal responsive styles for hero profile image
-   ============================================================ */
-.hero-content {
-  display: block;
-}
-
-.hero-avatar {
-  margin-top: var(--space-6);
-  display: block;
-}
-
-.hero-avatar-img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-lg);
-  border: 3px solid rgba(0,0,0,0.06);
-  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  display: block;
-}
-
-.hero-avatar-img:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: var(--shadow-2xl);
-}
-
-@media (min-width: 900px) {
-  .hero-content {
-    display: flex;
-    align-items: center;
-    gap: var(--space-12);
-  }
-
-  .hero-avatar {
-    margin-top: 0;
-    flex: 0 0 auto;
-    order: 2;
-  }
-
-  .hero-headline {
-    order: 1;
-  }
-
-  .hero-description {
-    max-width: 60ch;
-  }
-}
-
-/* ============================================================
       10. ACCESSIBILITY
       ============================================================ */
 .skip-link {
@@ -1895,7 +1844,7 @@ body.scrolled .scroll-indicator {
 
 .projects-header {
   text-align: center;
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
 }
 
 /* Filter controls */
@@ -1904,13 +1853,14 @@ body.scrolled .scroll-indicator {
   justify-content: center;
   align-items: center;
   gap: var(--space-4);
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-10);
   flex-wrap: wrap;
 }
 
 #project-search {
-  width: 280px;
-  padding: var(--space-3) var(--space-5);
+  width: 420px;
+  min-width: 220px;
+  padding: var(--space-4) var(--space-6);
   background: var(--color-bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
@@ -1934,7 +1884,7 @@ body.scrolled .scroll-indicator {
   display: flex;
   gap: var(--space-1);
   background: var(--color-bg-secondary);
-  padding: var(--space-1);
+  padding: calc(var(--space-1) + 2px);
   border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
 }
@@ -1957,9 +1907,50 @@ body.scrolled .scroll-indicator {
 }
 
 .filter-btn.active {
-  background: var(--color-accent);
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-secondary)
+  );
   color: var(--color-text-inverse);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.filter-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 6px var(--color-accent-subtle);
+}
+
+/* Entrance tweaks for projects header + controls */
+.projects-header.reveal {
+  --delay: 0s;
+}
+.project-controls.reveal {
+  --delay: 0.08s;
+}
+.projects-header .section-heading {
+  font-size: clamp(2.25rem, 6vw, 3.25rem);
+}
+
+/* Make reveal movement a little more pronounced for header */
+.projects-header.reveal {
+  transform: translateY(22px);
+  opacity: 0;
+}
+.projects-header.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.project-controls.reveal {
+  transform: translateY(16px);
+  opacity: 0;
+}
+.project-controls.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
 }
 
 /* Projects Grid */
