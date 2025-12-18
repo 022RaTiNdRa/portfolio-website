@@ -802,7 +802,14 @@ const ModalController = (() => {
     desc.textContent = card.dataset.description;
     tech.textContent = `Tech: ${card.dataset.tech}`;
     renderCaseStudy(card);
-    github.href = card.dataset.github;
+    if (card.dataset.github) {
+      github.href = card.dataset.github;
+      github.style.display = "";
+      github.target = "_blank";
+      github.rel = "noopener noreferrer";
+    } else {
+      github.style.display = "none";
+    }
 
     // Show/hide live link
     if (card.dataset.live) {
