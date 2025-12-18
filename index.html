@@ -211,7 +211,34 @@
     <main id="main-content">
       <!-- =======================================================
          HERO SECTION
-              <!-- Skills cards removed per request -->
+         Animated headline with word reveal
+    ======================================================= -->
+      <section id="home">
+        <div class="container">
+          <div class="hero-content">
+            <!-- Status Badge -->
+            <div class="hero-badge">
+              <span class="pulse" aria-hidden="true"></span>
+              <span>Available for opportunities</span>
+            </div>
+
+            <!-- Animated Headline with Typewriter -->
+            <h1 class="display-xl hero-headline">
+              <span class="line">
+                <span class="word">I craft</span>
+              </span>
+              <span class="line">
+                <span class="word typewriter-wrapper">
+                  <span id="typewriter" class="accent"></span>
+                  <span class="cursor" aria-hidden="true">|</span>
+                </span>
+              </span>
+            </h1>
+
+            <!-- Description -->
+            <p class="hero-description">
+              Backend developer focused on building scalable, reliable, and
+              secure server-side systems, APIs, and data-driven services that
               power great user experiences.
             </p>
 
@@ -232,7 +259,15 @@
                 <span>Get in Touch</span>
               </a>
             </div>
-              <!-- Search input removed per request -->
+          </div>
+
+          <!-- Scroll Indicator -->
+          <div class="scroll-indicator" aria-hidden="true">
+            <div class="mouse">
+              <div class="wheel"></div>
+            </div>
+            <span>Scroll</span>
+          </div>
         </div>
       </section>
 
@@ -808,16 +843,14 @@
           <div class="blog-grid">
             <!-- Article 1 -->
             <article class="blog-card reveal tilt-card">
-              <header class="blog-card-header">
-                <p class="blog-meta">
-                  <span class="blog-tag">Case Study</span>
-                  <span class="blog-dot" aria-hidden="true">•</span>
-                  <span class="blog-reading-time">8 min read</span>
-                </p>
-                <h3 class="blog-title">
-                  Designing an Award-Ready Developer Portfolio in Vanilla JS
-                </h3>
-              </header>
+              <p class="blog-meta">
+                <span class="blog-tag">Case Study</span>
+                <span class="blog-dot" aria-hidden="true">•</span>
+                <span class="blog-reading-time">8 min read</span>
+              </p>
+              <h3 class="blog-title">
+                Designing an Award-Ready Developer Portfolio in Vanilla JS
+              </h3>
               <p class="blog-excerpt">
                 A deep dive into the decisions behind this portfolio – from
                 motion design and accessibility to performance budgets and
@@ -834,16 +867,14 @@
 
             <!-- Article 2 -->
             <article class="blog-card reveal tilt-card">
-              <header class="blog-card-header">
-                <p class="blog-meta">
-                  <span class="blog-tag">Architecture</span>
-                  <span class="blog-dot" aria-hidden="true">•</span>
-                  <span class="blog-reading-time">6 min read</span>
-                </p>
-                <h3 class="blog-title">
-                  Designing a Maintainable CLI: The Student Management System
-                </h3>
-              </header>
+              <p class="blog-meta">
+                <span class="blog-tag">Architecture</span>
+                <span class="blog-dot" aria-hidden="true">•</span>
+                <span class="blog-reading-time">6 min read</span>
+              </p>
+              <h3 class="blog-title">
+                Designing a Maintainable CLI: The Student Management System
+              </h3>
               <p class="blog-excerpt">
                 How I approached domain modeling, error handling, and testing
                 for a Python-based student management system that runs entirely
@@ -860,17 +891,15 @@
 
             <!-- Article 3 -->
             <article class="blog-card reveal tilt-card">
-              <header class="blog-card-header">
-                <p class="blog-meta">
-                  <span class="blog-tag">Backend</span>
-                  <span class="blog-dot" aria-hidden="true">•</span>
-                  <span class="blog-reading-time">5 min read</span>
-                </p>
-                <h3 class="blog-title">
-                  Building Resilient UI with Local Storage & Offline-First
-                  Thinking
-                </h3>
-              </header>
+              <p class="blog-meta">
+                <span class="blog-tag">Backend</span>
+                <span class="blog-dot" aria-hidden="true">•</span>
+                <span class="blog-reading-time">5 min read</span>
+              </p>
+              <h3 class="blog-title">
+                Building Resilient UI with Local Storage & Offline-First
+                Thinking
+              </h3>
               <p class="blog-excerpt">
                 Lessons from building small tools like a task manager and
                 weather app, and how to keep experiences fast and reliable even
