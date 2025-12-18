@@ -1,160 +1,208 @@
-﻿# Portfolio Website
+﻿Portfolio Website
 
-This repository is a compact, production-ready static portfolio built with semantic HTML, modern CSS, and optional Eleventy support for templating. The project emphasizes accessibility, performance, and a minimal-dependency workflow.
+A lightweight, accessible, and high-performance portfolio website built with semantic HTML, modern CSS, and vanilla JavaScript.
+Designed to be production-ready, dependency-light, and easily deployable on any static hosting platform.
 
-This README is an advanced, practical guide for developers and maintainers: running the site, developing locally, testing, deploying, and extending the project.
+Optional Eleventy (11ty) support is included for developers who prefer templating and content-driven workflows.
 
----
+ Features
 
-**Table of contents**
-- Project overview
-- Quick start (static preview)
-- Eleventy (optional templating)
-- Development workflow
-- Testing, linting & CI
-- Deployment
-- Accessibility & SEO
-- Performance optimizations
-- Customization & structure
-- Contributing & license
+ Fast & minimal — no framework overhead
 
----
+ Accessible by default — semantic HTML, keyboard-friendly, ARIA-aware
 
-## Project overview
+ Responsive — mobile-first layout
 
-- Purpose: A lightweight, accessible, and high-performance portfolio to showcase projects, skills and contact information.
-- Core files: `index.html`, `style.css`, `script.js`, `CHANGELOG.md`, `LICENSE`.
-- Optional: Eleventy scaffold under `src/` with `.eleventy.js` for templating.
+ Progressively enhanced — works without JavaScript
 
-This repository is designed to be hostable on GitHub Pages, Netlify, Vercel or any static hosting provider.
+ Zero-build or Eleventy-powered
 
-## Quick start — static preview (no build)
+ SEO-ready — metadata, Open Graph, clean markup
 
-1. Clone the repository and open it locally:
+ CI-validated — HTML & accessibility checks
 
-```powershell
+ Project Overview
+
+Purpose
+Showcase projects, skills, and contact information with a clean, professional frontend.
+
+Core files
+
+index.html        # Main HTML entry
+style.css         # Global styles & CSS variables
+script.js         # Optional JS behaviors
+CHANGELOG.md
+LICENSE
+
+
+Optional
+
+src/              # Eleventy templates & content
+.eleventy.js      # Eleventy configuration
+.github/workflows/ci.yml
+
+
+This repository can be deployed as-is or built via Eleventy.
+
+ Quick Start (Static Preview — No Build)
+
+Clone and preview instantly:
+
 git clone <your-repo-url>
 cd portfolio-website
-```
 
-2. Preview the site without any build tools:
 
-```powershell
-# Python 3 built-in static server
+Start a local server:
+
+# Python
 python -m http.server 5500
-# or using Node (no install required via npx)
+
+# or Node (via npx)
 npx http-server -p 5500
-# then open http://localhost:5500
-```
 
-These commands are useful for quick checks and mirror what CI uses when validating pages.
 
-## Eleventy (optional templating)
+Open:
+ http://localhost:5500
 
-This repo includes an optional Eleventy scaffold to simplify templating and content updates.
+Ideal for quick testing and CI parity.
 
-Install and run Eleventy locally:
+ Eleventy (Optional Templating)
 
-```powershell
+Eleventy is optional, not required.
+
+Install & Run
 npm install
-npm run start    # runs eleventy with --serve
-npm run build    # builds static site into _site/
-```
+npm run start   # Eleventy dev server
+npm run build   # Builds static site into _site/
 
-Notes:
-- `start` uses `npx @11ty/eleventy --serve` so a global install isn't required.
-- Output directory is `_site` by default (configured in `.eleventy.js`).
+Notes
 
-## Development workflow
+Uses npx @11ty/eleventy (no global install)
 
-- Keep markup semantic and content-first.
-- Use `style.css` for global theming and variables. Keep critical styles minimal and defer heavy utilities to production builds.
-- Keep `script.js` focused and small; prefer progressive enhancement.
-- For more advanced workflows, add an npm-based toolchain (build, lint, image optimization).
+Output directory: _site/
 
-## Testing, linting & CI
+Fully compatible with GitHub Pages, Netlify, Vercel
 
-This repository contains a basic GitHub Actions workflow at `.github/workflows/ci.yml` that:
+ Development Guidelines
 
-- checks out the repo
-- spins up a static server
-- runs an HTML validator and a Pa11y accessibility check
+Use semantic HTML (header, main, section, article)
 
-You can run the same checks locally:
+Keep CSS content-first and variable-driven
 
-```powershell
+Avoid JS for layout or critical UX
+
+Prefer progressive enhancement
+
+Keep bundle size small
+
+ Testing, Linting & CI
+
+A GitHub Actions workflow validates:
+
+HTML correctness
+
+Accessibility (Pa11y)
+
+Run Locally
 npx http-server -p 9000
 npx html-validator-cli --file=index.html --verbose
 npx pa11y http://127.0.0.1:9000
-```
 
-Consider adding these to CI in future iterations:
-- ESLint/Stylelint
-- Visual regression tests
-- Automated accessibility audits (axe)
+Suggested Enhancements
 
-## Deployment
+ESLint / Stylelint
 
-Recommended static hosts:
+Axe accessibility audits
 
-- GitHub Pages: push to `main` and enable Pages (or use Actions to build + deploy).
-- Netlify: connect the repo; set build command `npm run build` (if using Eleventy) and publish directory `_site`.
-- Vercel: connect repo and configure to run `npm run build` and serve the static output.
+Visual regression testing
 
-For zero-build deployments, simply upload repository root contents.
+ Deployment
+Recommended Platforms
 
-## Accessibility & SEO
+GitHub Pages
 
-- Use semantic headings and landmarks.
-- Provide `alt` text for images; `alt=""` for decorative assets.
-- Include a `meta description` and Open Graph/Twitter metadata in `<head>` for sharing.
-- Add a `skip-to-content` link for keyboard users.
+Netlify
 
-Lighthouse and Pa11y are recommended for ongoing accessibility checks.
+Vercel
 
-## Performance optimizations
+Zero-Build Deploy
 
-- Minify CSS and JS for production builds.
-- Inline critical CSS for the above-the-fold experience.
-- Use `preload` for key fonts and `font-display: swap`.
-- Optimize images (AVIF/WebP) and use responsive `srcset`.
-- Serve via CDN/HTTP/2 for best results.
+Upload the repository root contents directly.
 
-Example: defer non-critical JS
+Eleventy Deploy
+PlatformBuild CommandOutput
+Netlifynpm run build_site
+Vercelnpm run build_site
+ Accessibility & SEO
 
-```html
+Semantic landmarks & heading hierarchy
+
+Keyboard navigation support
+
+Skip-to-content link
+
+Proper alt usage
+
+Meta description & Open Graph tags
+
+Tools:
+
+Lighthouse
+
+Pa11y
+
+axe-core
+
+ Performance Best Practices
+
+Minify CSS & JS
+
+Inline critical CSS
+
+font-display: swap
+
+Responsive images (srcset)
+
+Use AVIF/WebP
+
+Defer non-critical JS
+
 <script src="/script.js" defer></script>
-```
 
-## Project structure & customization
+ Customization
 
-- `index.html` — primary HTML entry
-- `style.css` — global css and variables
-- `script.js` — optional JS behaviors
-- `src/` — Eleventy templates (if present)
-- `.eleventy.js` — Eleventy config
-- `.github/workflows/ci.yml` — CI validation
+Update branding via CSS variables
 
-To customize branding, update CSS variables and template content under `src/` (or `index.html`).
+Edit content directly in index.html
+or
 
-## Contributing
+Use Eleventy templates under src/
 
-If you accept contributions:
+ Contributing
 
-1. Fork the repo
-2. Create a branch: `git checkout -b feat/your-change`
-3. Run validations locally and include screenshots for UI changes
-4. Open a PR with a clear description and testing steps
+Fork the repository
 
-## License
+Create a branch
 
-This project is distributed under the MIT License. See the `LICENSE` file in the repository root.
+git checkout -b feat/your-feature
 
----
 
-If you'd like, I can also:
-- add a `CONTRIBUTING.md` and `CODE_OF_CONDUCT.md`,
-- expand the CI workflow to run linting and visual tests, or
-- generate seeding JSON for projects and wire them into Eleventy templates.
+Run validations
 
-Tell me which task you want next and I'll proceed.
+Open a PR with:
+
+Clear description
+
+Screenshots (for UI changes)
+
+ License
+
+Licensed under the MIT License.
+See the LICENSE file for details.
+
+ About
+
+An accessible, high-performance portfolio built with HTML, CSS, and vanilla JavaScript.
+
+Topics:
+html css javascript portfolio frontend accessibility
