@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,6 +13,11 @@ app.use(cors());
 app.use(express.json());
 
 // ===============================
+// Resend setup
+// ===============================
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// ===============================
 // Test Routes
 // ===============================
 app.get("/", (req, res) => {
@@ -22,85 +27,71 @@ app.get("/", (req, res) => {
 app.get("/api/hello", (req, res) => {
   res.json({
     message: "Hello from backend 👋",
-    time: new Date().toISOString()
+    time: new Date().toISOString(),
   });
 });
 
 // ===============================
-// 📩 Contact Form API
+// 📩 Contact Form API (Resend)
 // ===============================
 app.post("/api/contact", async (req, res) => {
-  const { name, email, message } = req.body;
-
-  // Basic validation
-  if (!name || !email || !message) {
-    return res.status(400).json({
-      success: false,
-      error: "All fields are required"
-    });
-  }
-
   try {
-    // Create Gmail transporter
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
+    const { name, email, message } = req.body;
+
+    // Validation
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        error: "All fields are required",
+      });
+    }
 
     // ===============================
-    // 1️⃣ Email to YOU (Admin)
+    // Send email to YOU
     // ===============================
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: "Portfolio <onboarding@resend.dev>",
       to: process.env.EMAIL_TO,
-      subject: "📩 New Contact Message",
-      replyTo: email,
-      text: `
-Name: ${name}
-Email: ${email}
-
-Message:
-${message}
-      `
+      subject: `📩 New message from ${name}`,
+      html: `
+        <h3>New Contact Message</h3>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b></p>
+        <p>${message}</p>
+      `,
     });
 
     // ===============================
-    // 2️⃣ Auto-reply to USER
+    // Auto-reply to USER
     // ===============================
-    await transporter.sendMail({
-      from: `"Ratindra Parate" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: "Ratindra Parate <onboarding@resend.dev>",
       to: email,
-      subject: "Thanks for reaching out! 👋",
-      text: `
-Hi ${name},
-
-Thanks for contacting me! 😊
-I’ve received your message and will get back to you as soon as possible.
-
-Here’s a copy of what you sent:
-
-"${message}"
-
-Best regards,
-Ratindra Parate
-      `
+      subject: "Thanks for reaching out 👋",
+      html: `
+        <p>Hi ${name},</p>
+        <p>Thanks for contacting me! 😊</p>
+        <p>I’ve received your message and will reply soon.</p>
+        <hr />
+        <p><b>Your message:</b></p>
+        <p>${message}</p>
+        <br />
+        <p>— Ratindra</p>
+      `,
     });
 
-    console.log("📧 Emails sent successfully");
-
-    res.json({
+    // ✅ VERY IMPORTANT RESPONSE
+    return res.json({
       success: true,
-      message: "Message sent successfully"
+      message: "Message sent successfully",
     });
   } catch (error) {
-    console.error("❌ Email send failed:", error);
+    console.error("❌ Resend error:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      error: "Failed to send email"
+      error: "Failed to send email",
     });
   }
 });
@@ -109,5 +100,5 @@ Ratindra Parate
 // Start Server
 // ===============================
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
