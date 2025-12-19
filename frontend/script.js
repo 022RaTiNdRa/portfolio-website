@@ -1297,3 +1297,68 @@ styleSheet.textContent = `
     }
 `;
 document.head.appendChild(styleSheet);
+
+// ============================================================
+// BACKEND API CONNECTION (DEV / TEST)
+// ============================================================
+
+const API_BASE_URL = "http://localhost:5000";
+
+fetch(`${API_BASE_URL}/api/hello`)
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("Backend response:", data);
+
+    // Optional: show on page (temporary)
+    const el = document.createElement("p");
+    el.textContent = data.message;
+    el.style.marginTop = "20px";
+    el.style.color = "#00ffcc";
+    document.body.appendChild(el);
+  })
+  .catch((err) => {
+    console.error("Error connecting to backend:", err);
+  });
+
+// ============================================================
+// CONTACT FORM → BACKEND
+// ============================================================
+
+
+
+const form = document.getElementById("contact-form");
+const statusText = document.getElementById("formStatus");
+
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = form.elements.name.value;
+    const email = form.elements.email.value;
+    const message = form.elements.message.value;
+
+    statusText.textContent = "Sending...";
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        statusText.textContent = "✅ Message sent successfully!";
+        form.reset();
+      } else {
+        statusText.textContent = "❌ " + (data.error || "Something went wrong");
+      }
+    } catch (err) {
+      console.error(err);
+      statusText.textContent = "❌ Server error. Try again later.";
+    }
+  });
+}
