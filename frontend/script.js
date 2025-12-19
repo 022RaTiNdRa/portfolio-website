@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Features
   ModalController.init();
   ProjectFilterController.init();
-  FormController.init();
   CommandPalette.init();
 });
 
@@ -933,45 +932,6 @@ const ProjectFilterController = (() => {
         activeFilter = btn.dataset.filter;
         filterProjects();
       });
-    });
-  }
-
-  return { init };
-})();
-
-// ============================================================
-// CONTACT FORM CONTROLLER
-// Handles form submission with feedback
-// ============================================================
-const FormController = (() => {
-  function init() {
-    const form = document.getElementById("contact-form");
-    if (!form) return;
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn.textContent;
-
-      // Loading state
-      btn.textContent = "Sending...";
-      btn.disabled = true;
-
-      // Simulate API call (replace with actual submission)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Success state
-      btn.textContent = "✓ Message Sent!";
-      btn.style.background = "var(--color-success)";
-      form.reset();
-
-      // Reset after delay
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = "";
-        btn.disabled = false;
-      }, 3000);
     });
   }
 
