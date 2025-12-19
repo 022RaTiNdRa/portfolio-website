@@ -1302,7 +1302,8 @@ document.head.appendChild(styleSheet);
 // BACKEND API CONNECTION (DEV / TEST)
 // ============================================================
 
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://portfolio-website-x7bt.onrender.com";
+
 
 fetch(`${API_BASE_URL}/api/hello`)
   .then((res) => res.json())
