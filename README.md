@@ -1,4 +1,4 @@
-﻿# ⚡ PORTFOLIO WEBSITE | ACCESSIBLE | PRODUCTION-READY ⚡
+﻿# ⚡ PORTFOLIO WEBSITE | PRODUCTION-READY ⚡
 
 > 💼 A modern, accessible, high-performance **full-stack portfolio website** built with **semantic HTML**, **modern CSS**, **vanilla JavaScript**, and a **Node.js + Express backend** with real email functionality.
 
